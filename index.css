@@ -1,13 +1,19 @@
 body{
   /* background-color: red; */
+  display: grid;
+  grid-template-rows: auto auto auto;
+  align-content: space-evenly;
 }
 
 .gridContainer {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto auto;
 }
 
 .main {
-  grid-column: 2 / 3;
+  grid-column: 3 / 5;
   color: green;
+}
+.sidebar {
+  background-color: #b3b3ff;
 }
