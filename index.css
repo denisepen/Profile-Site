@@ -1,21 +1,30 @@
 body{
   /* background-color: red; */
   display: grid;
-  grid-template-rows: 12% 80% 5%;
+  /* grid-template-rows: 12% 80% 5%; */
+  /* grid-template-rows: 100px auto auto; */
+  grid-template-rows: 100px calc(100vh - 100px);
   font-family: 'Mukta', sans-serif;
   color: #595bc9;
-  /* grid-template-rows: 1fr auto; */
+}
 
-
-  /* align-content: space-evenly; */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
 }
 
 .head {
   /* background-color: #6666ff; */
+  /* position: fixed; */
 }
 
 header {
   text-align: right;
+  padding-right: 60px;
+}
+
+#title {
+
 }
 
 header h1 {
@@ -39,7 +48,7 @@ ul {
   padding: 10px;
 }
 
-.main {
+#main {
   /* grid-column: 2 / 7; */
   /* background-color: #9999ff; */
   /* color: green; */
@@ -47,13 +56,17 @@ ul {
 .main h2 {
   padding: 0 5px;
 }
+.scroll {
+  /* height: 95%; */
+  overflow-y: scroll;
+}
 
 .post {
   /* height: 250px;
   width: 50%; */
-  height: 25%;
-  width: 75%;
-  padding: 15px;
+  /* height: 150px; */
+  width: 80%;
+  padding: 5px;
 }
 
 .sidebar {

@@ -10,8 +10,8 @@
 <body>
   <div class="head">
     <header class="header">
-      <h1>Denise Pen</h1>
-      <span>😀   😅</span>
+      <h1 id="title"><a href="#blog">Denise Pen</a></h1>
+      <p>Doing what I do...</p>
     </header>
   </div>
 
@@ -20,35 +20,85 @@
         <nav class="nav">
           <h1>Side Nav</h1>
           <ul>
-            <li> <a href="">Portfolio</a></li>
-            <li><a href="">Publications</a></li>
-            <li><a href="">Blog</a></li>
-            <li><a href="">About </a></li>
+            <li> <a href="#portfolio" id="portfolio">Portfolio</a></li>
+            <li><a href="#publications" id="publications">Publications</a></li>
+            <li><a href="http://deniseonaquest.com/" id="blog">Blog</a></li>
+            <li><a href="#about" id="about">About </a></li>
           </ul>
         </nav>
     </div>
-      <div class="main">
+    <div class="scroll">
+      <div id="main">
         <h2>Main Section</h2>
-        <section class="post">
-          <h2>Post1</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia corporis inventore molestias numquam sed, nihil, maxime expedita magni quo, atque, tempore voluptatibus ea. Magni velit quo error laudantium quos. Vitae?</p>
-        </section >
-        <section class="post">
-          <h2>Post2</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae fugiat neque ratione veniam, architecto omnis rerum. Aliquam, enim nisi hic laboriosam, ipsam cum sapiente nostrum eos illum numquam, velit dolorum.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia corporis inventore molestias numquam sed, nihil, maxime expedita magni quo, atque, tempore voluptatibus ea. Magni velit quo error laudantium quos. Vitae?</p>
-        </section>
-        <section class="post">
-          <h2>Post3</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia corporis inventore molestias numquam sed, nihil, maxime expedita magni quo, atque, tempore voluptatibus ea. Magni velit quo error laudantium quos. Vitae?</p>
-        </section>
       </div>
-  </div>
-  <div class="footer">
-    <footer>
-    <h4>Info On Footer</h4>
-    </footer>
+      <div class="footer">
+        <footer>
+        <h4>Info On Footer</h4>
+        </footer>
+      </div>
+    </div>
   </div>
 
+  <script type="text/javascript">
+    const app = document.getElementById('main');
+
+    function getPageData(page, callback) {
+      fetch(`/content/${page}.html`)
+        .then(function(response) {
+          return response.text();
+        })
+        .then(function(content) {
+          callback(null, content);
+        })
+        .catch(function(err) {
+          callback(err);
+        });
+    }
+
+    function renderLocation(location) {
+      const callback = function(err, content) {
+        if (err) {
+          alert('Check error!');
+          console.error('ERROR: ' + err);
+          return;
+        }
+
+        app.innerHTML = content;
+      }
+
+      switch (location) {
+
+        case 'portfolio':
+          getPageData('portfolio', callback);
+          break;
+        case 'blog':
+          getPageData('blog', callback);
+          break;
+        default:
+          alert('not found');
+          getPageData('404', callback);
+      }
+    }
+
+    function handleHashChange(evt) {
+      const hash = window.location.hash;
+      const location = hash.replace('#', '');
+
+      renderLocation(location);
+    }
+
+    window.addEventListener('hashchange', handleHashChange);
+
+    if (window.location.hash === '') {
+      window.location.hash = '#blog';
+    } else {
+      handleHashChange();
+    }
+
+  </script>
   <script src="function.js "></script>
 </body>
 </html>
+
+<!-- https://stackoverflow.com/questions/43999732/how-to-make-a-fixed-column-in-css-using-css-grid-layout -->
+<!-- How to make your html page scroll -->
